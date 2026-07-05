@@ -1,0 +1,29 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        #Solurtion1 dfs
+        n = len(nums)
+
+        def canReach(index):
+            if index>=n-1:
+                return True
+            return False
+
+        checked = set()
+
+        def dfs(index):
+            if canReach(index):
+                return True
+            
+            if index in checked:
+                return False
+
+            moves = nums[index]
+            for jump in range(1,moves+1):
+                if dfs(index+jump):
+                    return True
+                checked.add(index+jump)
+            
+            return False
+
+
+        return dfs(0)
